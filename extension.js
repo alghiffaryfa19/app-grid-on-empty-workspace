@@ -31,9 +31,13 @@ export default class OverviewOnEmptyWorkspaceExtension {
         let index = activeWs.index();
         let lastIndex = wm.n_workspaces - 1;
 
-        let windows = activeWs.list_windows().filter(w => !w.skip_taskbar);
+        // let windows = activeWs.list_windows().filter(w => !w.skip_taskbar);
 
-        if (index === lastIndex || windows.length === 0) {
+        // if (index === lastIndex || windows.length === 0) {
+        //     Main.overview.showApps();
+        // }
+
+        if (index === lastIndex) {
             Main.overview.showApps();
         }
     }
