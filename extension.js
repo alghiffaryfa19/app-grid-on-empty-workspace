@@ -11,8 +11,31 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 export default class OverviewOnEmptyWorkspaceExtension {
     
     enable() {
-        global.display.connectObject('window-left-monitor', () => Main.overview.showApps(), this);
-        global.workspace_manager.connectObject('active-workspace-changed', () => Main.overview.showApps(), this);
+        global.display.connectObject(
+            'window-left-monitor',
+            () => this._checkWorkspace(),
+            this
+        );
+
+        global.workspace_manager.connectObject(
+            'active-workspace-changed',
+            () => this._checkWorkspace(),
+            this
+        );
+    }
+
+    _checkWorkspace() {
+        let wm = global.workspace_manager;
+
+        let activeWs = wm.get_active_workspace();
+        let index = activeWs.index();
+        let lastIndex = wm.n_workspaces - 1;
+
+        let windows = activeWs.list_windows().filter(w => !w.skip_taskbar);
+
+        if (index === lastIndex || windows.length === 0) {
+            Main.overview.showApps();
+        }
     }
 
     disable() {
