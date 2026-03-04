@@ -1,16 +1,13 @@
 {
-  "name": "Overview on empty workspace",
-  "description": "Show overview if the workspace is empty.",
+  "name": "App Grid on empty workspace",
+  "description": "Show app grid if the workspace is empty.",
   "shell-version": [
     "46",
     "47",
     "48",
     "49"
   ],
-  "uuid": "overview-on-empty-workspace@fthx",
-  "url": "https://github.com/fthx/overview-on-empty-workspace",
-  "version": 999,
-  "donations": {
-    "paypal": "fthx75"
-  }
+  "uuid": "app-grid-on-empty-workspace@alghiffaryfa19",
+  "url": "https://github.com/alghiffaryfa19/app-grid-on-empty-workspace",
+  "version": 999
 }

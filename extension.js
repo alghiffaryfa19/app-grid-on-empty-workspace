@@ -9,22 +9,10 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 
 export default class OverviewOnEmptyWorkspaceExtension {
-    _showOverview() {
-        if (this._timeout)
-            GLib.Source.remove(this._timeout);
-
-        this._timeout = GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
-            if (!Main.overview.visible && global.workspace_manager.get_active_workspace()?.n_windows === 0)
-                Main.overview.show();
-
-            this._timeout = null;
-            return GLib.SOURCE_REMOVE;
-        });
-    }
-
+    
     enable() {
-        global.display.connectObject('window-left-monitor', () => this._showOverview(), this);
-        global.workspace_manager.connectObject('active-workspace-changed', () => this._showOverview(), this);
+        global.display.connectObject('window-left-monitor', () => Main.overview.showApps(), this);
+        global.workspace_manager.connectObject('active-workspace-changed', () => Main.overview.showApps(), this);
     }
 
     disable() {
